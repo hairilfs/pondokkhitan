@@ -19,8 +19,8 @@ class Dashboard extends CI_Controller {
 
 	public function json_data()
 	{
-		$th = array('nama_lengkap', 'ortu_wali', 'no_hp', 'lokasi_klinik', 'tgl_khitan', 'status');
-		$data['data'] = $this->mod_dashboard->get_datatable_data($th);
+		$th = array('id_daftar_khitan','nama_lengkap', 'ortu_wali', 'no_hp', 'lokasi_klinik', 'tgl_khitan', 'status');
+		$data['pendaftar'] = $this->mod_dashboard->get_datatable_data($th);
 		echo json_encode($data);
 	}
 
