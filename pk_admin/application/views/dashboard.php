@@ -264,67 +264,80 @@
           </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade" id="modelwelcome" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Administrator Panel</h4>
+              </div>
+              <div class="modal-body text-center">
+                <p>Hello, welcome back <?php echo $this->session->username; ?>!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-    <?php include 'inc/footer.php'; ?>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/locale/id.js"></script>
+    <?php include 'inc/footer.php'; ?>    
     <script type="text/javascript">
     var id_pendaftar_det = 0;
     var id_pendaftar_dit = 0;
 
     $(function(){
 
-      var table_num = 0;
-      $("#example1").DataTable({
-        "responsive": true,
-        "ajax": {
-          "url": "dashboard/json_data",
-          "dataSrc": "pendaftar"
-        },
-        "bProcessing": true,
-        "bServerSide": false,
-        "columns": [
-        {
-          "data": function(){
-            table_num++;
-            return table_num;
-          }
-        },
-        {"data": "nama_lengkap"},
-        {"data": "ortu_wali"},
-        {"data": "no_hp"},
-        {"data": "lokasi_klinik"},
-        {
-          "mRender": function(data, type, full) {
-            moment.locale();
-            var tgl_khitan = moment.unix(full.tgl_khitan).format("dddd, DD MMMM YYYY");
-            return tgl_khitan;
-          }
-        },
-        {"data": "status"},
-        {
-          "mRender": function(data, type, full){
-            var btn =   '<button type="button" class="btn btn-sm btn-info modal-detail" data-toggle="modal" data-target="#modet" data-id="'+full.id_daftar_khitan+'" title="Detail">';
-            btn +=      '<i class="fa fa-search-plus"></i>';
-            btn +=  '</button>&nbsp;';
-            btn +=  '<button type="button" class="btn btn-sm btn-warning modal-edit" data-toggle="modal" data-target="#modit" data-id="'+full.id_daftar_khitan+'" title="Edit">';
-            btn +=      '<i class="fa fa-pencil"></i>';
-            btn +=  '</button>&nbsp;';
-            btn +=  '<button type="button" class="btn btn-sm btn-danger modal-delete"  data-toggle="modal" data-target="#model" data-id="'+full.id_daftar_khitan+'" title="Remove">';
-            btn +=      '<i class="fa fa-trash"></i>';
-            btn +=  '</button>&nbsp;';
-            
-            return btn;
-          }
+        var table_num = 0;
+        $("#example1").DataTable({
+            "responsive": true,
+            "ajax": {
+              "url": "dashboard/json_data",
+              "dataSrc": "pendaftar"
+            },
+            "bProcessing": true,
+            "bServerSide": false,
+            "columns": [
+                {
+                  "data": function(){
+                    table_num++;
+                    return table_num;
+                    }
+                },
+                {"data": "nama_lengkap"},
+                {"data": "ortu_wali"},
+                {"data": "no_hp"},
+                {"data": "lokasi_klinik"},
+                {
+                  "mRender": function(data, type, full) {
+                    moment.locale();
+                    var tgl_khitan = moment.unix(full.tgl_khitan).format("dddd, DD MMMM YYYY");
+                    return tgl_khitan;
+                    }
+                },
+                {"data": "status"},
+                {
+                  "mRender": function(data, type, full){
+                    var btn =   '<button type="button" class="btn btn-sm btn-info modal-detail" data-toggle="modal" data-target="#modet" data-id="'+full.id_daftar_khitan+'" title="Detail">';
+                    btn +=      '<i class="fa fa-search-plus"></i>';
+                    btn +=  '</button>&nbsp;';
+                    btn +=  '<button type="button" class="btn btn-sm btn-warning modal-edit" data-toggle="modal" data-target="#modit" data-id="'+full.id_daftar_khitan+'" title="Edit">';
+                    btn +=      '<i class="fa fa-pencil"></i>';
+                    btn +=  '</button>&nbsp;';
+                    btn +=  '<button type="button" class="btn btn-sm btn-danger modal-delete"  data-toggle="modal" data-target="#model" data-id="'+full.id_daftar_khitan+'" title="Remove">';
+                    btn +=      '<i class="fa fa-trash"></i>';
+                    btn +=  '</button>&nbsp;';
 
-        }
-        ]
-      });
+                    return btn;
+                    }
 
-$('<button type="button" class="btn btn-primary btn-flat btn-sm add-new" data-toggle="modal" data-target="#modit"><i class="fa fa-plus-circle"></i> Add New</buton>')
-.appendTo('#example1_length');
-$('.add-new').css('margin-left', '20px');
+                }
+            ]
+        });
+
+        $('<button type="button" class="btn btn-primary btn-flat btn-sm add-new" data-toggle="modal" data-target="#modit"><i class="fa fa-plus-circle"></i> Add New</buton>')
+        .appendTo('#example1_length');
+        $('.add-new').css('margin-left', '20px');
 
         //Date picker
         $('.datepicker').datepicker({
@@ -372,64 +385,67 @@ $('.add-new').css('margin-left', '20px');
 
               id_pendaftar_det = id_dk;
             }, 'json');          
-}
-});
+        }
+    });
 
-$('#example1').on('click', '.modal-edit', function(){
-  $('#add_edit_label').html('Edit data pendaftar');
-  var id_dk = $(this).data('id');    
-  if(id_pendaftar_dit != id_dk) {
-    var json_data = "dashboard/detail_pendaftar/"+id_dk;
-    $('#state_dit').html('<i class="fa fa-refresh fa-spin"></i> Loading data, please wait...');
+    $('#example1').on('click', '.modal-edit', function(){
+        $('#add_edit_label').html('Edit data pendaftar');
+        var id_dk = $(this).data('id');    
+        if(id_pendaftar_dit != id_dk) {
+            var json_data = "dashboard/detail_pendaftar/"+id_dk;
+            $('#state_dit').html('<i class="fa fa-refresh fa-spin"></i> Loading data, please wait...');
 
-    $.get(json_data, function(response){
-      moment.locale();
-      var tgl_lhr = moment.unix(response.tgl_lahir).format("DD-MM-YYYY");
-      var t_tindakan = moment.unix(response.tgl_khitan).format("DD-MM-YYYY");
-      $('#state_dit').html('');
-      $('.edit-isi').eq(0).val(response.nama_lengkap);
-      $('.edit-isi').eq(1).val(response.ortu_wali);
-      $('.edit-isi').eq(2).val(response.no_ktp);
-      $('.edit-isi').eq(3).val(response.no_hp);
-      $('.edit-isi').eq(4).val(response.tempat_lahir);
-      $('.edit-isi').eq(5).val(tgl_lhr);
-      $('.edit-isi').eq(6).val(response.agama);
-      $('.edit-isi').eq(7).val(response.alamat);
-      $('.edit-isi').eq(8).val(response.berat_badan);
-      $('.edit-isi').eq(9).val(response.jns_khitan);
-      $('.edit-isi').eq(10).val(response.lokasi_klinik);
-      $('.edit-isi').eq(11).val(t_tindakan);
-      $('.edit-isi').eq(12).val(response.status);
+            $.get(json_data, function(response){
+                moment.locale();
+                var tgl_lhr = moment.unix(response.tgl_lahir).format("DD-MM-YYYY");
+                var t_tindakan = moment.unix(response.tgl_khitan).format("DD-MM-YYYY");
+                $('#state_dit').html('');
+                $('.edit-isi').eq(0).val(response.nama_lengkap);
+                $('.edit-isi').eq(1).val(response.ortu_wali);
+                $('.edit-isi').eq(2).val(response.no_ktp);
+                $('.edit-isi').eq(3).val(response.no_hp);
+                $('.edit-isi').eq(4).val(response.tempat_lahir);
+                $('.edit-isi').eq(5).val(tgl_lhr);
+                $('.edit-isi').eq(6).val(response.agama);
+                $('.edit-isi').eq(7).val(response.alamat);
+                $('.edit-isi').eq(8).val(response.berat_badan);
+                $('.edit-isi').eq(9).val(response.jns_khitan);
+                $('.edit-isi').eq(10).val(response.lokasi_klinik);
+                $('.edit-isi').eq(11).val(t_tindakan);
+                $('.edit-isi').eq(12).val(response.status);
 
-      id_pendaftar_dit = id_dk;
-      $('#form_edit').attr('action', 'dashboard/edit_pasien/'+id_dk);
-    }, 'json');          
-}            
-});
+                id_pendaftar_dit = id_dk;
+                $('#form_edit').attr('action', 'dashboard/edit_pasien/'+id_dk);
+            }, 'json');          
+        }            
+    });
 
-$('#example1').on('click', '.modal-delete', function(){
-  var id = $(this).data('id');
+    $('#example1').on('click', '.modal-delete', function(){
+        var id = $(this).data('id');
+        $('#delpas').attr('action', 'dashboard/delete_pasien/'+id);
+    });
 
-  $('#delpas').attr('action', 'dashboard/delete_pasien/'+id);
-});
+    $('.add-new').on('click',function(){
+        $('#add_edit_label').html('Tambah data pendaftar');
+        $('.edit-isi').eq(0).val('');
+        $('.edit-isi').eq(1).val('');
+        $('.edit-isi').eq(2).val('');
+        $('.edit-isi').eq(3).val('');
+        $('.edit-isi').eq(4).val('');
+        $('.edit-isi').eq(5).val('');
+        $('.edit-isi').eq(6).val('');
+        $('.edit-isi').eq(7).val('');
+        $('.edit-isi').eq(8).val('');
+        $('.edit-isi').eq(9).val('');
+        $('.edit-isi').eq(10).val('');
+        $('.edit-isi').eq(11).val('');
+        $('.edit-isi').eq(12).val('');
+        $('#form_edit').attr('action', 'dashboard/edit_pasien/');
+    });
 
-$('.add-new').on('click',function(){
-  $('#add_edit_label').html('Tambah data pendaftar');
-  $('.edit-isi').eq(0).val('');
-  $('.edit-isi').eq(1).val('');
-  $('.edit-isi').eq(2).val('');
-  $('.edit-isi').eq(3).val('');
-  $('.edit-isi').eq(4).val('');
-  $('.edit-isi').eq(5).val('');
-  $('.edit-isi').eq(6).val('');
-  $('.edit-isi').eq(7).val('');
-  $('.edit-isi').eq(8).val('');
-  $('.edit-isi').eq(9).val('');
-  $('.edit-isi').eq(10).val('');
-  $('.edit-isi').eq(11).val('');
-  $('.edit-isi').eq(12).val('');
-  $('#form_edit').attr('action', 'dashboard/edit_pasien/');
-});
+    <?php if($this->session->flashdata('msg') == 'success') { ?>
+        $('#modelwelcome').modal('show');
+    <?php } ?>
 });
 </script>
 </body>

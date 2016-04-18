@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="assets/plugins/datatables/dataTables.bootstrap.css">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="assets/plugins/datepicker/datepicker3.css">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="assets/plugins/daterangepicker/daterangepicker-bs3.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="assets/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
