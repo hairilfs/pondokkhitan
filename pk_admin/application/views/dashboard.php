@@ -17,10 +17,6 @@
           Dashboard
           <small>Control panel</small>
         </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-          <li class="active">Dashboard</li>
-        </ol>
       </section>
 
       <!-- Main content -->
@@ -40,7 +36,8 @@
                       <th>Nama Orangtua/Wali</th>
                       <th>No. HP</th>
                       <th>Klinik</th>
-                      <th>Tgl. Tindakan</th>
+                      <th>Tgl. Registrasi</th>
+                      <th>Tgl. Khitan</th>
                       <th>Status</th>
                       <th>Action</th>
                     </tr>          
@@ -108,7 +105,15 @@
                     <td class="modetisi"></td>
                   </tr>
                   <tr>
+                    <th>Tgl. Registrasi</th>
+                    <td class="modetisi"></td>
+                  </tr>
+                  <tr>
                     <th>Tgl. Khitan</th>
+                    <td class="modetisi"></td>
+                  </tr>
+                  <tr>
+                    <th>Update terakhir</th>
                     <td class="modetisi"></td>
                   </tr>
                   <tr>
@@ -311,6 +316,13 @@
                 {
                   "mRender": function(data, type, full) {
                     moment.locale();
+                    var tgl_regist = moment.unix(full.rdate).format("DD MMM YYYY hh:mm:ss");
+                    return tgl_regist;
+                    }
+                },
+                {
+                  "mRender": function(data, type, full) {
+                    moment.locale();
                     var tgl_khitan = moment.unix(full.tgl_khitan).format("dddd, DD MMMM YYYY");
                     return tgl_khitan;
                     }
@@ -368,6 +380,8 @@
               moment.locale();
               var tgl_lhr = moment.unix(response.tgl_lahir).format("dddd, DD MMMM YYYY");
               var tgl_tin = moment.unix(response.tgl_khitan).format("dddd, DD MMMM YYYY");
+              var tgl_reg = moment.unix(response.rdate).format("dddd, DD MMM YYYY hh:mm:ss");
+              var tgl_update = moment.unix(response.mdate).format("dddd, DD MMM YYYY hh:mm:ss");
               $('#state_det').html('');
               $('.modetisi').eq(0).html(response.nama_lengkap);
               $('.modetisi').eq(1).html(response.ortu_wali);
@@ -380,8 +394,10 @@
               $('.modetisi').eq(8).html(response.alamat);
               $('.modetisi').eq(9).html(response.jns_khitan);
               $('.modetisi').eq(10).html(response.lokasi_klinik);
-              $('.modetisi').eq(11).html(tgl_tin);
-              $('.modetisi').eq(12).html(response.status);
+              $('.modetisi').eq(11).html(tgl_reg);
+              $('.modetisi').eq(12).html(tgl_tin);
+              $('.modetisi').eq(13).html(tgl_update);
+              $('.modetisi').eq(14).html(response.status);
 
               id_pendaftar_det = id_dk;
             }, 'json');          

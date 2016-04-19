@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Log in</title>
+    <title>PondokKhitan | Log in</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <base href="<?php echo base_url(); ?>">
@@ -31,14 +31,22 @@
         <a href="javascript:void(0);"><b>Pondok</b>Khitan</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <?php 
+          if (!empty($this->session->flashdata('err'))) {
+            echo $this->session->flashdata('err');
+          } else {
+            echo '<p class="login-box-msg">Sign in to start your session</p>';
+          }
+        ?>        
         <form action="login" method="post">
+          <?php echo form_error('email') ? "<label class='text-danger'>".form_error('email')."</label>" : ""; ?>
           <div class="form-group has-feedback">
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
+            <input type="email" name="email" class="form-control" placeholder="Email" value="" required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
+          <?php echo form_error('password') ? "<label class='text-danger'>".form_error('password')."</label>" : ""; ?>
           <div class="form-group has-feedback">
-            <input type="password" name="password" class="form-control" placeholder="Password" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" value="" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           <div class="row">

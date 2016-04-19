@@ -14,7 +14,7 @@
       <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
+                Report
                 <small>Control panel</small>
             </h1>
         </section>
@@ -37,7 +37,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" name="daterange" class="form-control pull-right" id="reservation">
+                                    <input type="text" name="daterange" class="form-control pull-right" id="reservation" required>
                                 </div><!-- /.input group -->
                             </div><!-- /.box-body -->
                             <div class="box-footer">

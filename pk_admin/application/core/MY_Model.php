@@ -12,7 +12,8 @@ class MY_Model extends CI_Model
     }
 
     public function get_all_data()
-    {
+    {   
+
         $data = $this->db->get($this->table);
         return $data->result_array();
     }
@@ -21,6 +22,7 @@ class MY_Model extends CI_Model
     {   
         $th = implode(", ", $column);
         $this->db->select($th);
+        $this->db->order_by($this->key, "desc");
     	$data = $this->db->get($this->table);
     	return $data->result_array();
     }
@@ -37,6 +39,7 @@ class MY_Model extends CI_Model
         else
         {
             return $query->row();
+            // return $query->result_array();
         }
       
     }

@@ -6,7 +6,7 @@ class Login extends MY_Controller {
 	{
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
 		if ($this->form_validation->run() == FALSE)
@@ -29,8 +29,9 @@ class Login extends MY_Controller {
 				$this->mod_auth->update($admin->id,$data);
 
 				$log_data = array(
+					'id_adm' => $admin->id,				                  
 					'username' => $admin->username,
-					'email' => $admin->password,
+					'email' => $admin->email,
 					'is_login' => TRUE		
 				);
 
@@ -40,8 +41,7 @@ class Login extends MY_Controller {
 			}
 			else
 			{
-				$this->session->set_flashdata('err','<p class="text-center" style="color: red;">Invalid Email or Password</p>');
-
+				$this->session->set_flashdata('err','<p class="login-box-msg text-danger">Oops! Invalid email or password.</p>');					
 				redirect('login');
 			}
 		}

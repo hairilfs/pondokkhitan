@@ -16,7 +16,7 @@ class MY_Controller extends CI_Controller {
 class MY_CMS_Controller extends MY_Controller {
 
 	public function __construct(){
-        parent::__construct();
+        parent::__construct();        
 
         if(!$this->session->username)
         {

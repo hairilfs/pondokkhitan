@@ -22,7 +22,7 @@
                 </a>
                 <ul class="dropdown-menu">
                   <!-- Menu Footer-->
-                  <li><a href="javascript:void(0);"><i class="fa fa-key"></i>Change password</a></li>
+                  <li><a href="index.php/profile/view/<?php echo $this->session->id_adm; ?>"><i class="fa fa-user"></i>Profile</a></li>
                   <li><a href="index.php/login/logout"><i class="fa fa-sign-out"></i>Sign out</a></li>
                 </ul>
               </li>

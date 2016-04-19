@@ -19,7 +19,7 @@ class Dashboard extends MY_CMS_Controller {
 
 	public function json_data()
 	{
-		$th = array('id_daftar_khitan','nama_lengkap', 'ortu_wali', 'no_hp', 'lokasi_klinik', 'tgl_khitan', 'status');
+		$th = array('id_daftar_khitan','nama_lengkap', 'ortu_wali', 'no_hp', 'lokasi_klinik', 'tgl_khitan', 'status', 'rdate');
 		$data['pendaftar'] = $this->mod_dashboard->get_datatable_data($th);
 		echo json_encode($data);
 	}
@@ -52,11 +52,15 @@ class Dashboard extends MY_CMS_Controller {
 
 		if ($id!=null) {
 			$data['id_daftar_khitan'] = $id;
+			date_default_timezone_set('Asia/Jakarta');
+			$data['mdate'] = time();
 			$res = $this->mod_dashboard->update($id, $data);
 			$notif = "<div class='alert alert-success alert-dismissible pull-right' role='alert'>
 			  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
 			  Data berhasil disimpan.</div>";
 		} else {
+			date_default_timezone_set('Asia/Jakarta');
+			$data['rdate'] = time();
 			$res = $this->mod_dashboard->insert($data);
 			$notif = "<div class='alert alert-success alert-dismissible pull-right' role='alert'>
 			  <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
